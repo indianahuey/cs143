@@ -13,12 +13,12 @@ from gerrychain.tree import recursive_tree_part
 from gerrychain.proposals import recom
 from gerrychain.accept import always_accept
 from functools import partial
-from utils import *
+from utils_creation import graph_of_partition
 
 np.random.seed(123456)
 
 # number of generated plans in each ensemble
-NUM_STEPS = 100
+NUM_STEPS = 30000
 
 def main():
     print(f'Steps = {NUM_STEPS}')
