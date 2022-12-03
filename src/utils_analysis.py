@@ -81,7 +81,11 @@ def shortest_paths(dual_graph):
         between all pairs of vertices.
     """
     dual_graph = csr_matrix(dual_graph)
-    dist_matrix, predecessors = floyd_warshall(csgraph=dual_graph, directed=False, return_predecessors=True)
+    dist_matrix, predecessors = floyd_warshall(
+        csgraph=dual_graph,
+        directed=False,
+        return_predecessors=True
+    )
     return dist_matrix, predecessors
 
 
