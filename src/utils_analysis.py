@@ -5,6 +5,57 @@
     Functions for graph analysis.
 """
 
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.sparse import csr_matrix
+from scipy.sparse.csgraph import floyd_warshall
+
+
+def metric_ensemble(metric, graph_ensemble):
+    """ Return list of metric values,
+        given list of graphs---
+        i.e. apply metric to ensemble.
+    """
+    ensemble = []
+    for graph in graph_ensemble:
+        ensemble.append(metric(graph))
+    return ensemble
+
+
+def visualize(metric, graph_ensemble, graphs, colors, linestyles, title):
+    """ Plot distribution of metric values
+        from graph ensemble, and place metric
+        values of graphs in distribution.
+    """
+    # plot ensemble distribution
+    plt.figure()
+    plt.hist(
+        metric_ensemble(metric, graph_ensemble),
+        color='grey'
+    )
+
+    # plot specific graphs in distribution
+    for i, G in enumerate(graphs):
+        plt.axvline(
+            metric(G),
+            color=colors[i],
+            linestyle=linestyles[i]
+        )
+
+    plt.title(title)
+    plt.show()
+
+
+def avg_vertex_degree(dual_graph):
+    """ Return mean vertex degree,
+        given graph.
+    """
+    total = 0
+    for v in dual_graph:
+        total += sum(v)
+    return total / len(dual_graph)
+
+
 def min_vertex_degree(dual_graph):
     """ Return min vertex degree,
         given graph.
@@ -25,11 +76,34 @@ def max_vertex_degree(dual_graph):
     return maximum
 
 
-def avg_vertex_degree(dual_graph):
-    """ Return mean vertex degree,
+def shortest_paths(dual_graph):
+    """ Return length of shortest paths
+        between all pairs of vertices.
+    """
+    dual_graph = csr_matrix(dual_graph)
+    dist_matrix, predecessors = floyd_warshall(csgraph=dual_graph, directed=False, return_predecessors=True)
+    return dist_matrix, predecessors
+
+
+def avg_shortest_paths_vertex(dist_matrix, v):
+    """ Return the average length of shortest paths
+        between vertex v and all other vertices.
+    """
+    return sum(dist_matrix[v]) / (len(dist_matrix)-1)
+
+
+def avg_shortest_paths_dist_matrix(dist_matrix):
+    """ Return the average length of all shortest paths
+        (between pairs of vertices) in the graph.
+    """
+    num_vertices = len(dist_matrix)
+    num_pairs = (num_vertices * (num_vertices - 1)) / 2
+    return np.sum(np.triu(dist_matrix)) / num_pairs
+
+
+def avg_shortest_paths(graph):
+    """ Return average of all pairs shortest paths,
         given graph.
     """
-    total = 0
-    for v in dual_graph:
-        total += sum(v)
-    return total / len(dual_graph)
+    dist_matrix, predecessors = shortest_paths(graph)
+    return avg_shortest_paths_dist_matrix(dist_matrix)

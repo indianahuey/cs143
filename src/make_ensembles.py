@@ -49,14 +49,14 @@ def main():
     """ Create initial partitions from base dual graph
     """
     # gerrymandered
-    part_2011 = Partition(VTDs_graph, 'CD_2011', {"cut edges": cut_edges, 'district pop': Tally('TOTPOP', alias = 'district pop')})
+    part_2011 = Partition(VTDs_graph, 'CD_2011', {'cut edges': cut_edges, 'district pop': Tally('TOTPOP', alias = 'district pop')})
 
     # non-gerrymandered
-    part_2018 = Partition(VTDs_graph, 'REMEDIAL', {"cut edges": cut_edges, 'district pop': Tally('TOTPOP', alias = 'district pop')})
+    part_2018 = Partition(VTDs_graph, 'REMEDIAL', {'cut edges': cut_edges, 'district pop': Tally('TOTPOP', alias = 'district pop')})
 
     # random
     plan_random = recursive_tree_part(VTDs_graph, range(num_districts), ideal_pop, 'TOTPOP', pop_tolerance, 10)
-    part_random = Partition(VTDs_graph, plan_random, {"cut edges": cut_edges, 'district pop': Tally('TOTPOP', alias = 'district pop')})
+    part_random = Partition(VTDs_graph, plan_random, {'cut edges': cut_edges, 'district pop': Tally('TOTPOP', alias = 'district pop')})
 
 
     """ Set proposal method: ReCom
