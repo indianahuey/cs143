@@ -23,7 +23,7 @@ def metric_ensemble(metric, graph_ensemble):
     return ensemble
 
 
-def visualize(metric, graph_ensemble, graphs, colors, linestyles, title):
+def visualize(metric, graph_ensemble, graphs, colors, linestyles, title, xlabel):
     """ Plot distribution of metric values
         from graph ensemble, and place metric
         values of graphs in distribution.
@@ -32,7 +32,8 @@ def visualize(metric, graph_ensemble, graphs, colors, linestyles, title):
     plt.figure()
     plt.hist(
         metric_ensemble(metric, graph_ensemble),
-        color='grey'
+        color='burlywood',
+        align='left'
     )
 
     # plot specific graphs in distribution
@@ -40,10 +41,13 @@ def visualize(metric, graph_ensemble, graphs, colors, linestyles, title):
         plt.axvline(
             metric(G),
             color=colors[i],
-            linestyle=linestyles[i]
+            linestyle=linestyles[i],
+            linewidth=2,
         )
 
     plt.title(title)
+    plt.ylabel('# Plans')
+    plt.xlabel(xlabel)
     plt.show()
 
 

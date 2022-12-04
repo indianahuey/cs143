@@ -49,25 +49,33 @@ def main():
 
     """ Check for convergence
     """
+    # https://matplotlib.org/stable/gallery/color/named_colors.html
+    colors = ['firebrick', 'olivedrab', 'burlywood']
     plt.figure()
     plt.title('Cut Edges from 10 Steps')
-    plt.hist(cut_edges_2011[:10], color='red', alpha=0.85, bins=15)
-    plt.hist(cut_edges_2018[:10], color='green', alpha=0.85, bins=15)
-    plt.hist(cut_edges_random[:10], color='grey', alpha=0.85, bins=15)
+    plt.hist(cut_edges_2011[:10], color=colors[0], alpha=1, bins=15)
+    plt.hist(cut_edges_2018[:10], color=colors[1], alpha=1, bins=15)
+    plt.hist(cut_edges_random[:10], color=colors[2], alpha=1, bins=15)
+    plt.ylabel('# Plans')
+    plt.xlabel('# Cut Edges')
     plt.show()
 
     plt.figure()
     plt.title('Cut Edges from 100 Steps')
-    plt.hist(cut_edges_2011[:100], color='red', alpha=0.85, bins=15)
-    plt.hist(cut_edges_2018[:100], color='green', alpha=0.85, bins=15)
-    plt.hist(cut_edges_random[:100], color='grey', alpha=0.85, bins=15)
+    plt.hist(cut_edges_2011[:100], color=colors[0], alpha=0.9, bins=15)
+    plt.hist(cut_edges_2018[:100], color=colors[1], alpha=0.9, bins=15)
+    plt.hist(cut_edges_random[:100], color=colors[2], alpha=0.9, bins=15)
+    plt.ylabel('# Plans')
+    plt.xlabel('# Cut Edges')
     plt.show()
 
     plt.figure()
     plt.title('Cut Edges from 50,000 Steps')
-    plt.hist(cut_edges_2011, color='red', alpha=0.85, bins=15)
-    plt.hist(cut_edges_2018, color='green', alpha=0.85, bins=15)
-    plt.hist(cut_edges_random, color='grey', alpha=0.85, bins=15)
+    plt.hist(cut_edges_2011, color=colors[0], alpha=0.85, bins=15)
+    plt.hist(cut_edges_2018, color=colors[1], alpha=0.85, bins=15)
+    plt.hist(cut_edges_random, color=colors[2], alpha=0.85, bins=15)
+    plt.ylabel('# Plans')
+    plt.xlabel('# Cut Edges')
     plt.show()
 
 
@@ -75,17 +83,21 @@ def main():
     """
     ensemble = graphs_random
     graphs = [G_2011, G_ts, G_2018]
-    colors = ['red', 'orange', 'green']
-    linestyles = ['dashed', 'dashed', 'dashdot']
+    colors = ['firebrick', 'palevioletred', 'olivedrab']
+    linestyles = ['dashed', 'dashdot', 'dotted']
 
-    visualize(avg_vertex_degree, ensemble, graphs, colors, linestyles, 'Average Vertex Degree')
-    visualize(min_vertex_degree, ensemble, graphs, colors, linestyles, 'Minumum Vertex Degree')
-    visualize(max_vertex_degree, ensemble, graphs, colors, linestyles, 'Maximum Vertex Degree')
-    visualize(avg_shortest_paths, ensemble, graphs, colors, linestyles, 'Average Shortest Paths')
-    visualize(max_shortest_paths, ensemble, graphs, colors, linestyles, 'Longest Shortest Path')
-    visualize(avg_betweenness, ensemble, graphs, colors, linestyles, 'Average Betweenness')
-    visualize(min_betweenness, ensemble, graphs, colors, linestyles, 'Minimum Betweenness')
-    visualize(max_betweenness, ensemble, graphs, colors, linestyles, 'Maximum Betweenness')
+    visualize(avg_vertex_degree, ensemble, graphs, colors, linestyles, 'Average Vertex Degree', 'Avg. Degree')
+    visualize(min_vertex_degree, ensemble, graphs, colors, linestyles, 'Minumum Vertex Degree', 'Min Degree')
+    visualize(max_vertex_degree, ensemble, graphs, colors, linestyles, 'Maximum Vertex Degree', 'Max Degree')
+
+    return 0
+
+    visualize(avg_shortest_paths, ensemble, graphs, colors, linestyles, 'Average Length of All Pairs Shortest Path', 'Avg. Length')
+    visualize(max_shortest_paths, ensemble, graphs, colors, linestyles, 'Longest Length of All Pairs Shortest Path', 'Longest Length')
+
+    visualize(avg_betweenness, ensemble, graphs, colors, linestyles, 'Average Vertex Betweenness Centrality', 'Avg. Betweenness')
+    visualize(min_betweenness, ensemble, graphs, colors, linestyles, 'Minimum Vertex Betweenness Centrality', 'Min Betweenness')
+    visualize(max_betweenness, ensemble, graphs, colors, linestyles, 'Maximum Vertex Betweenness Centrality', 'Max Betweenness')
 
 
 if __name__ == '__main__':
