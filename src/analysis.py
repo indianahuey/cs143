@@ -51,6 +51,8 @@ def main():
     """
     # https://matplotlib.org/stable/gallery/color/named_colors.html
     colors = ['firebrick', 'olivedrab', 'burlywood']
+
+    # 10 steps
     plt.figure()
     plt.title('Cut Edges from 10 Steps')
     plt.hist(cut_edges_2011[:10], color=colors[0], alpha=1, bins=15)
@@ -60,6 +62,7 @@ def main():
     plt.xlabel('# Cut Edges')
     plt.show()
 
+    # 100 steps
     plt.figure()
     plt.title('Cut Edges from 100 Steps')
     plt.hist(cut_edges_2011[:100], color=colors[0], alpha=0.9, bins=15)
@@ -69,6 +72,7 @@ def main():
     plt.xlabel('# Cut Edges')
     plt.show()
 
+    # 50,000 steps
     plt.figure()
     plt.title('Cut Edges from 50,000 Steps')
     plt.hist(cut_edges_2011, color=colors[0], alpha=0.85, bins=15)
@@ -86,15 +90,16 @@ def main():
     colors = ['firebrick', 'palevioletred', 'olivedrab']
     linestyles = ['dashed', 'dashdot', 'dotted']
 
+    # vertex degree
     visualize(avg_vertex_degree, ensemble, graphs, colors, linestyles, 'Average Vertex Degree', 'Avg. Degree')
     visualize(min_vertex_degree, ensemble, graphs, colors, linestyles, 'Minumum Vertex Degree', 'Min Degree')
     visualize(max_vertex_degree, ensemble, graphs, colors, linestyles, 'Maximum Vertex Degree', 'Max Degree')
 
-    return 0
-
+    # all pairs shortest path
     visualize(avg_shortest_paths, ensemble, graphs, colors, linestyles, 'Average Length of All Pairs Shortest Path', 'Avg. Length')
     visualize(max_shortest_paths, ensemble, graphs, colors, linestyles, 'Longest Length of All Pairs Shortest Path', 'Longest Length')
 
+    # betweenness
     visualize(avg_betweenness, ensemble, graphs, colors, linestyles, 'Average Vertex Betweenness Centrality', 'Avg. Betweenness')
     visualize(min_betweenness, ensemble, graphs, colors, linestyles, 'Minimum Vertex Betweenness Centrality', 'Min Betweenness')
     visualize(max_betweenness, ensemble, graphs, colors, linestyles, 'Maximum Vertex Betweenness Centrality', 'Max Betweenness')
