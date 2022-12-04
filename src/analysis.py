@@ -64,7 +64,7 @@ def main():
     plt.show()
 
     plt.figure()
-    plt.title('Cut Edges from 30,000 Steps')
+    plt.title('Cut Edges from 50,000 Steps')
     plt.hist(cut_edges_2011, color='red', alpha=0.85, bins=15)
     plt.hist(cut_edges_2018, color='green', alpha=0.85, bins=15)
     plt.hist(cut_edges_random, color='grey', alpha=0.85, bins=15)
@@ -82,6 +82,10 @@ def main():
     visualize(min_vertex_degree, ensemble, graphs, colors, linestyles, 'Minumum Vertex Degree')
     visualize(max_vertex_degree, ensemble, graphs, colors, linestyles, 'Maximum Vertex Degree')
     visualize(avg_shortest_paths, ensemble, graphs, colors, linestyles, 'Average Shortest Paths')
+    visualize(max_shortest_paths, ensemble, graphs, colors, linestyles, 'Longest Shortest Path')
+    visualize(avg_betweenness, ensemble, graphs, colors, linestyles, 'Average Betweenness')
+    visualize(min_betweenness, ensemble, graphs, colors, linestyles, 'Minimum Betweenness')
+    visualize(max_betweenness, ensemble, graphs, colors, linestyles, 'Maximum Betweenness')
 
 
 if __name__ == '__main__':

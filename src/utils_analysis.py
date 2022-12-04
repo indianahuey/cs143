@@ -6,6 +6,7 @@
 """
 
 import numpy as np
+import networkx as nx
 import matplotlib.pyplot as plt
 from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import floyd_warshall
@@ -111,3 +112,44 @@ def avg_shortest_paths(graph):
     """
     dist_matrix, predecessors = shortest_paths(graph)
     return avg_shortest_paths_dist_matrix(dist_matrix)
+
+
+def max_shortest_paths(graph):
+    """ Return longest of all pairs shortest paths,
+        given graph.
+    """
+    dist_matrix, predecessors = shortest_paths(graph)
+    return max([max(v) for v in dist_matrix])
+
+
+def avg_betweenness(graph):
+    """ Return average of all vertex betweenness,
+        given graph.
+    """
+    # adj matrix to nx graph
+    nx_graph = nx.from_numpy_array(np.array(graph))
+    # dict<node: betweenness>
+    betweenness = nx.betweenness_centrality(nx_graph)
+    return sum(betweenness.values()) / len(betweenness)
+
+
+def min_betweenness(graph):
+    """ Return min of all vertex betweenness,
+        given graph.
+    """
+    # adj matrix to nx graph
+    nx_graph = nx.from_numpy_array(np.array(graph))
+    # dict<node: betweenness>
+    betweenness = nx.betweenness_centrality(nx_graph)
+    return min(betweenness.values())
+
+
+def max_betweenness(graph):
+    """ Return max of all vertex betweenness,
+        given graph.
+    """
+    # adj matrix to nx graph
+    nx_graph = nx.from_numpy_array(np.array(graph))
+    # dict<node: betweenness>
+    betweenness = nx.betweenness_centrality(nx_graph)
+    return max(betweenness.values())
